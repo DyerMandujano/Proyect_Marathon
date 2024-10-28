@@ -1,0 +1,6 @@
+@Proyecto_Marathon2024_HostAddress = http://localhost:5223
+
+GET {{Proyecto_Marathon2024_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
