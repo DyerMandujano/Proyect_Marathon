@@ -18,7 +18,7 @@ builder.Services.AddScoped<PersonalRepository>();
 
 
 var app = builder.Build();
-
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //Permite el acceso a la API desde cualquier origen
 builder.Services.AddEndpointsApiExplorer();
 
 
