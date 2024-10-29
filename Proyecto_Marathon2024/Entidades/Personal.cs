@@ -2,6 +2,7 @@
 {
     public class Personal
     {
+        //Propiedades
         public string Dni_Personal { get; set; }
         public int Cod_Perfil { get; set; }
         public int Cod_Tipo_Trabajo { get; set; }
