@@ -16,6 +16,7 @@ builder.Services.AddTransient<DataAccses>();  //Acceso a la base de datos
 builder.Services.AddScoped<Perfil_PersonalRepository>();  
 builder.Services.AddScoped<PersonalRepository>();
 builder.Services.AddScoped<ProductoRepository>();
+//hi
 
 
 var app = builder.Build();
