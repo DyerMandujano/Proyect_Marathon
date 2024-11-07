@@ -21,9 +21,9 @@ namespace Proyecto_Marathon2024.Controllers
         }
 
         [HttpGet("GetClienteID/{dni}")]
-        public async Task<IActionResult> GetCliente_porDni(string dni)
+        public async Task<IActionResult> GetClienteDni(string dni)
         {
-            var respuesta = await _Cliente.GetCliente_PorDni(dni);
+            var respuesta = await _Cliente.GetClienteDni(dni);
             if (respuesta != null)
             {
                 return Ok(respuesta);
