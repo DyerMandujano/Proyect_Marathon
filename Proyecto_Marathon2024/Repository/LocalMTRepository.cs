@@ -5,17 +5,17 @@ using System.Data;
 
 namespace Proyecto_Marathon2024.Repository
 {
-    public class Tipo_TrabajoRepository
+    public class LocalMTRepository
     {
         private readonly DataAccses dataAccses;
 
         //Contructor para el acceso a la base de datos
-        public Tipo_TrabajoRepository(DataAccses dataAccses)
+        public LocalMTRepository(DataAccses dataAccses)
         {
             this.dataAccses = dataAccses;
         }
 
-        public async Task<List<Tipo_Trabajo>> GetListaTp_Trabajo()
+        public async Task<List<LocalMT>> GetListaLocal()
         {
             try
             {
@@ -26,7 +26,7 @@ namespace Proyecto_Marathon2024.Repository
                     await connection.OpenAsync();
 
                     // Crear el comando para ejecutar el procedimiento almacenado
-                    using (SqlCommand command = new SqlCommand("SP_ListarTpTrabajo", connection))
+                    using (SqlCommand command = new SqlCommand("SP_ListarLocal", connection))
                     {
                         // Especificar que se trata de un procedimiento almacenado
                         command.CommandType = CommandType.StoredProcedure;
@@ -35,23 +35,28 @@ namespace Proyecto_Marathon2024.Repository
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             // Definir la lista que contendrá los resultados
-                            List<Tipo_Trabajo> listatpTrab = new List<Tipo_Trabajo>();
+                            List<LocalMT> listaLocal = new List<LocalMT>();
 
                             // Leer los resultados mientras haya filas
                             while (await reader.ReadAsync())
                             {
-                                Tipo_Trabajo tp_trab = new Tipo_Trabajo
+                                LocalMT localMT = new LocalMT
                                 {
-                                    Cod_Tipo_Trabajo = reader.GetInt32(reader.GetOrdinal("Cod_Tipo_Trabajo")),
-                                    Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
+                                    Cod_Local = reader.GetInt32(reader.GetOrdinal("Cod_Local")),
+                                    Cod_Zona = reader.GetInt32(reader.GetOrdinal("Cod_Zona")),
+                                    Cod_Sucursal = reader.GetInt32(reader.GetOrdinal("Cod_Sucursal")),
+                                    Cod_Distrito = reader.GetInt32(reader.GetOrdinal("Cod_Distrito")),
+                                    Nom_Local = reader.GetString(reader.GetOrdinal("Nom_Local")),
+                                    Direccion = reader.GetString(reader.GetOrdinal("Direccion")),
+                                    Telefono = reader.GetString(reader.GetOrdinal("Telefono")),
                                     Estado = reader.GetInt32(reader.GetOrdinal("Estado"))
                                 };
 
-                               
-                                listatpTrab.Add(tp_trab);
+
+                                listaLocal.Add(localMT);
                             }
 
-                            return listatpTrab;
+                            return listaLocal;
                         }
                     }
                 }
@@ -59,7 +64,7 @@ namespace Proyecto_Marathon2024.Repository
             catch (Exception ex)
             {
                 // Manejo de errores
-                throw new Exception("Error al obtener la lista de Tipos de Trabajo", ex);
+                throw new Exception("Error al obtener la lista de Locales.", ex);
             }
         }
     }

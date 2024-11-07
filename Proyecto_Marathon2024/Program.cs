@@ -16,6 +16,7 @@ builder.Services.AddTransient<DataAccses>();  //Acceso a la base de datos
 builder.Services.AddScoped<Perfil_PersonalRepository>();  
 builder.Services.AddScoped<PersonalRepository>();
 builder.Services.AddScoped<Tipo_TrabajoRepository>();
+builder.Services.AddScoped<LocalMTRepository>();
 
 
 var app = builder.Build();

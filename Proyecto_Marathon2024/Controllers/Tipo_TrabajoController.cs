@@ -11,7 +11,7 @@ namespace Proyecto_Marathon2024.Controllers
             _tipo_Trabajo = tipo_TrabajoRepository;
         }
 
-        [HttpGet("GetListaTipo_Personal")]
+        [HttpGet("GetListaTipo_Trabajo")]
         public async Task<IActionResult> GetListaTipo_Trabajo()
         {
             var respuesta = await _tipo_Trabajo.GetListaTp_Trabajo();
