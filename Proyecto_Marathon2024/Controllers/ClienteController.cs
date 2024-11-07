@@ -35,16 +35,16 @@ namespace Proyecto_Marathon2024.Controllers
         }
 
         [HttpPost("InsertCliente")]
-        public async Task<IActionResult> InsertarCliente([FromBody] Cliente perso)
+        public async Task<IActionResult> InsertarCliente([FromBody] Cliente clie)
         {
-            var resultado = await _Cliente.InsertCliente(perso);
+            var resultado = await _Cliente.InsertCliente(clie);
             return Ok(resultado);
         }
 
         [HttpPost("UpdateCliente/{dni}")]
-        public async Task<IActionResult> UpdateCliente(string dni, [FromBody] Cliente perso)
+        public async Task<IActionResult> UpdateCliente(string dni, [FromBody] Up_Cliente clie)
         {
-            var resultado = await _Cliente.UpdateClienteDni(dni, perso);
+            var resultado = await _Cliente.UpdateClienteDni(dni, clie);
             return Ok(resultado);
         }
 

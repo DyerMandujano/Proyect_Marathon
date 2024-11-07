@@ -150,12 +150,12 @@ namespace Proyecto_Marathon2024.Repository
                         command.CommandType = CommandType.StoredProcedure;
 
                         // Añadir los parámetros requeridos por el procedimiento almacenado
-                        command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = perso.Dni_Cliente;
+                        command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = perso.Dni_Cliente;    
                         command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = perso.Cod_Mem;
                         command.Parameters.Add("@nombres", SqlDbType.VarChar).Value = perso.Nombres;
                         command.Parameters.Add("@apellidos", SqlDbType.VarChar).Value = perso.Apellidos;
                         command.Parameters.Add("@correo", SqlDbType.VarChar).Value = perso.Correo;
-                        command.Parameters.Add("@fec_nac", SqlDbType.Date).Value = perso.Fecha_Nac.ToDateTime(TimeOnly.MinValue);
+                        command.Parameters.Add("@fecha_nac", SqlDbType.Date).Value = perso.Fecha_Nac.ToDateTime(TimeOnly.MinValue);
                         command.Parameters.Add("@genero", SqlDbType.VarChar).Value = perso.Genero;
                         command.Parameters.Add("@puntos_acum", SqlDbType.Int).Value = perso.Puntos_Acum;
                         command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = perso.User_Cli;
@@ -178,7 +178,7 @@ namespace Proyecto_Marathon2024.Repository
         }
 
 
-        public async Task<string> UpdateClienteDni(string dni, Cliente perso)
+        public async Task<string> UpdateClienteDni(string dni, Up_Cliente clie)
         {
             try
             {
@@ -197,11 +197,11 @@ namespace Proyecto_Marathon2024.Repository
                         // Añadir los parámetros requeridos por el procedimiento almacenado
                         command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = dni;
                         //
-                        command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = perso.Cod_Mem;
-                        command.Parameters.Add("@correo", SqlDbType.VarChar).Value = perso.Correo;
-                        command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = perso.User_Cli;
-                        command.Parameters.Add("@contra_cli", SqlDbType.VarChar).Value = perso.Contra_Cli;
-                        command.Parameters.Add("@estado", SqlDbType.Int).Value = perso.Estado;
+                        command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = clie.Cod_Mem;
+                        command.Parameters.Add("@correo", SqlDbType.VarChar).Value = clie.Correo;
+                        command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = clie.User_Cli;
+                        command.Parameters.Add("@contra_cli", SqlDbType.VarChar).Value = clie.Contra_Cli;
+                        command.Parameters.Add("@estado", SqlDbType.Int).Value = clie.Estado;
 
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();
