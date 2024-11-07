@@ -74,7 +74,7 @@ namespace Proyecto_Marathon2024.Repository
                 throw new Exception("Error al obtener la lista de perfiles del cliente", ex);
             }
         }
-        public async Task<Cliente> GetCliente_PorDni(string dni)
+        public async Task<Cliente> GetClienteDni(string dni)
         {
             try
             {
@@ -85,13 +85,13 @@ namespace Proyecto_Marathon2024.Repository
                     await connection.OpenAsync();
 
                     // Crear el comando para ejecutar el procedimiento almacenado
-                    using (SqlCommand command = new SqlCommand("SP_BucarClienteDNI", connection))
+                    using (SqlCommand command = new SqlCommand("SP_BuscarClienteDNI", connection))
                     {
                         //Se Especifica que es un procedimiento almacenado
                         command.CommandType = CommandType.StoredProcedure;
 
                         // Añadimos el parametro 'id' para el procedimiento almacenado
-                        command.Parameters.Add("@dni", SqlDbType.VarChar).Value = dni;
+                        command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = dni;
 
                         // Ejecutar el comando y obtener el SqlDataReader de manera asíncrona
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
@@ -144,22 +144,22 @@ namespace Proyecto_Marathon2024.Repository
                     await connection.OpenAsync();
 
                     // Crear el comando para ejecutar el procedimiento almacenado
-                    using (SqlCommand command = new SqlCommand("SP_Cliente", connection))
+                    using (SqlCommand command = new SqlCommand("SP_InsertCliente", connection))
                     {
                         // Especificar que se trata de un procedimiento almacenado
                         command.CommandType = CommandType.StoredProcedure;
 
                         // Añadir los parámetros requeridos por el procedimiento almacenado
-                        command.Parameters.Add("@dni_Cliente", SqlDbType.VarChar).Value = perso.Dni_Cliente;
-                        command.Parameters.Add("@cod_Mem", SqlDbType.Int).Value = perso.Cod_Mem;
-                        command.Parameters.Add("@nom", SqlDbType.VarChar).Value = perso.Nombres;
+                        command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = perso.Dni_Cliente;
+                        command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = perso.Cod_Mem;
+                        command.Parameters.Add("@nombres", SqlDbType.VarChar).Value = perso.Nombres;
                         command.Parameters.Add("@apellidos", SqlDbType.VarChar).Value = perso.Apellidos;
                         command.Parameters.Add("@correo", SqlDbType.VarChar).Value = perso.Correo;
                         command.Parameters.Add("@fec_nac", SqlDbType.Date).Value = perso.Fecha_Nac.ToDateTime(TimeOnly.MinValue);
                         command.Parameters.Add("@genero", SqlDbType.VarChar).Value = perso.Genero;
-                        command.Parameters.Add("@puntos_Acum", SqlDbType.Int).Value = perso.Puntos_Acum;
-                        command.Parameters.Add("@user_Cli", SqlDbType.VarChar).Value = perso.User_Cli;
-                        command.Parameters.Add("@contra_Cli", SqlDbType.VarChar).Value = perso.Contra_Cli;
+                        command.Parameters.Add("@puntos_acum", SqlDbType.Int).Value = perso.Puntos_Acum;
+                        command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = perso.User_Cli;
+                        command.Parameters.Add("@contra_cli", SqlDbType.VarChar).Value = perso.Contra_Cli;
                         command.Parameters.Add("@estado", SqlDbType.Int).Value = perso.Estado;
 
                         // Ejecutar el comando de manera asíncrona
@@ -178,7 +178,7 @@ namespace Proyecto_Marathon2024.Repository
         }
 
 
-        public async Task<string> UpdateCliente_porDni(string dni, Cliente perso)
+        public async Task<string> UpdateClienteDni(string dni, Cliente perso)
         {
             try
             {
@@ -195,17 +195,12 @@ namespace Proyecto_Marathon2024.Repository
                         command.CommandType = CommandType.StoredProcedure;
 
                         // Añadir los parámetros requeridos por el procedimiento almacenado
-                        command.Parameters.Add("@dni", SqlDbType.VarChar).Value = dni;
+                        command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = dni;
                         //
-                        command.Parameters.Add("@cod_Mem", SqlDbType.Int).Value = perso.Cod_Mem;
-                        command.Parameters.Add("@nom", SqlDbType.VarChar).Value = perso.Nombres;
-                        command.Parameters.Add("@apellidos", SqlDbType.VarChar).Value = perso.Apellidos;
+                        command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = perso.Cod_Mem;
                         command.Parameters.Add("@correo", SqlDbType.VarChar).Value = perso.Correo;
-                        command.Parameters.Add("@fec_nac", SqlDbType.Date).Value = perso.Fecha_Nac.ToDateTime(TimeOnly.MinValue);
-                        command.Parameters.Add("@genero", SqlDbType.VarChar).Value = perso.Genero;
-                        command.Parameters.Add("@puntos_Acum", SqlDbType.Int).Value = perso.Puntos_Acum;
-                        command.Parameters.Add("@user_Cli", SqlDbType.VarChar).Value = perso.User_Cli;
-                        command.Parameters.Add("@contra_Cli", SqlDbType.VarChar).Value = perso.Contra_Cli;
+                        command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = perso.User_Cli;
+                        command.Parameters.Add("@contra_cli", SqlDbType.VarChar).Value = perso.Contra_Cli;
                         command.Parameters.Add("@estado", SqlDbType.Int).Value = perso.Estado;
 
                         // Ejecutar el comando de manera asíncrona
@@ -235,7 +230,7 @@ namespace Proyecto_Marathon2024.Repository
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         // pasamos el dni a eliminar
-                        command.Parameters.Add("@dni", SqlDbType.VarChar).Value = dni;
+                        command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = dni;
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();
 
