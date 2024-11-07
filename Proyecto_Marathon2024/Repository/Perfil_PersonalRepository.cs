@@ -47,7 +47,7 @@ namespace Proyecto_Marathon2024.Repository
                                 // Crear una nueva instancia de Perfil_Personal y asignar los valores leídos
                                 Perfil_Personal perfil = new Perfil_Personal
                                 {
-                                    CodPerfil = reader.GetInt32(reader.GetOrdinal("Cod_Perfil")),
+                                    Cod_Perfil = reader.GetInt32(reader.GetOrdinal("Cod_Perfil")),
                                     Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
                                     Sueldo = reader.GetDecimal(reader.GetOrdinal("Sueldo")),
                                     Estado = reader.GetInt32(reader.GetOrdinal("Estado"))
@@ -97,7 +97,7 @@ namespace Proyecto_Marathon2024.Repository
                             {
                                 Perfil_Personal perfil = new Perfil_Personal
                                 {
-                                    CodPerfil = reader.GetInt32(reader.GetOrdinal("Cod_Perfil")),
+                                    Cod_Perfil = reader.GetInt32(reader.GetOrdinal("Cod_Perfil")),
                                     Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
                                     Sueldo = reader.GetDecimal(reader.GetOrdinal("Sueldo")),
                                     Estado = reader.GetInt32(reader.GetOrdinal("Estado"))

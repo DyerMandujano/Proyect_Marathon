@@ -1,10 +1,9 @@
 ﻿namespace Proyecto_Marathon2024.Entidades
 {
-    public class Perfil_Personal
+    public class Tipo_Trabajo
     {
-        public int Cod_Perfil { get; set; }
+        public int Cod_Tipo_Trabajo { get; set; }
         public string Descripcion { get; set; }
-        public decimal Sueldo { get; set; }
         public int Estado { get; set; }
     }
 }

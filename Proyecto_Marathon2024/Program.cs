@@ -12,9 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<DataAccses>();  //Acceso a la base de datos
-// Registra los Repostiorios
+// Registra los Repositorios
 builder.Services.AddScoped<Perfil_PersonalRepository>();  
-builder.Services.AddScoped<PersonalRepository>();  
+builder.Services.AddScoped<PersonalRepository>();
+builder.Services.AddScoped<Tipo_TrabajoRepository>();
 
 
 var app = builder.Build();

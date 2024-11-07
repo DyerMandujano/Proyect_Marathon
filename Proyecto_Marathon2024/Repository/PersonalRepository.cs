@@ -255,5 +255,9 @@ namespace Proyecto_Marathon2024.Repository
             }
 
         }
+
+        //Select Tipo trabajo
+
+
     }
 }
