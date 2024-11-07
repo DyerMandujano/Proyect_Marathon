@@ -44,7 +44,7 @@ namespace Proyecto_Marathon2024.Controllers
         [HttpPost("UpdateCliente/{dni}")]
         public async Task<IActionResult> UpdateCliente(string dni, [FromBody] Cliente perso)
         {
-            var resultado = await _Cliente.UpdateCliente_porDni(dni, perso);
+            var resultado = await _Cliente.UpdateClienteDni(dni, perso);
             return Ok(resultado);
         }
 
