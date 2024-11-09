@@ -17,7 +17,7 @@ builder.Services.AddScoped<Perfil_PersonalRepository>();
 builder.Services.AddScoped<PersonalRepository>();
 builder.Services.AddScoped<Tipo_TrabajoRepository>();
 builder.Services.AddScoped<LocalMTRepository>();
-
+builder.Services.AddScoped<ClienteRepository>();
 
 var app = builder.Build();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //Permite el acceso a la API desde cualquier origen
