@@ -16,6 +16,11 @@ builder.Services.AddTransient<DataAccses>();  //Acceso a la base de datos
 builder.Services.AddScoped<Perfil_PersonalRepository>();  
 builder.Services.AddScoped<PersonalRepository>();
 builder.Services.AddScoped<ProductoRepository>();
+builder.Services.AddScoped<CategoriaRepository>();
+builder.Services.AddScoped<MarcaRepository>();
+builder.Services.AddScoped<ColorRepository>();
+builder.Services.AddScoped<ModeloRepository>();
+builder.Services.AddScoped<TallaRepository>();
 
 var app = builder.Build();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //Permite el acceso a la API desde cualquier origen

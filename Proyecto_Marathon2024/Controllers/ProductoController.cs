@@ -15,7 +15,7 @@ namespace Proyecto_Marathon2024.Controllers
             _Producto = ProductoRepository;
         }
         [HttpGet("GetListaProducto")]
-        public async Task<IActionResult> GetListaPerfil_Personal()
+        public async Task<IActionResult> GetLista_Producto()
         {
             var respuesta = await _Producto.GetListaProducto();
             return Ok(respuesta);

@@ -48,7 +48,7 @@ namespace Proyecto_Marathon2024.Repository
                                 //DateOnly fecha = DateOnly.Parse(fec);
                                 Talla talla = new Talla
                                 {
-                                    Cod_Talla = reader.GetInt32(reader.GetOrdinal("Cod_Prod")),
+                                    Cod_Talla = reader.GetInt32(reader.GetOrdinal("Cod_Talla")),
                                     Nom_Talla = reader.GetString(reader.GetOrdinal("Nom_Talla")),
                                     Estado = reader.GetInt32(reader.GetOrdinal("Estado"))
                                 };
