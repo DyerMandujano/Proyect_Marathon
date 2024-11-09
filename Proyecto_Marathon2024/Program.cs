@@ -13,10 +13,19 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<DataAccses>();  //Acceso a la base de datos
 // Registra los Repositorios
-builder.Services.AddScoped<Perfil_PersonalRepository>();  
+//PERSONAL
 builder.Services.AddScoped<PersonalRepository>();
+builder.Services.AddScoped<Perfil_PersonalRepository>();
 builder.Services.AddScoped<Tipo_TrabajoRepository>();
 builder.Services.AddScoped<LocalMTRepository>();
+//PRODUCTO
+builder.Services.AddScoped<ProductoRepository>();
+builder.Services.AddScoped<CategoriaRepository>();
+builder.Services.AddScoped<MarcaRepository>();
+builder.Services.AddScoped<ColorRepository>();
+builder.Services.AddScoped<ModeloRepository>();
+builder.Services.AddScoped<TallaRepository>();
+
 builder.Services.AddScoped<ClienteRepository>();
 
 var app = builder.Build();
