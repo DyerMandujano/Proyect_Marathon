@@ -151,7 +151,6 @@ namespace Proyecto_Marathon2024.Repository
 
                         // Añadir los parámetros requeridos por el procedimiento almacenado
                         command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = perso.Dni_Cliente;    
-                        command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = perso.Cod_Mem;
                         command.Parameters.Add("@nombres", SqlDbType.VarChar).Value = perso.Nombres;
                         command.Parameters.Add("@apellidos", SqlDbType.VarChar).Value = perso.Apellidos;
                         command.Parameters.Add("@correo", SqlDbType.VarChar).Value = perso.Correo;
@@ -198,7 +197,11 @@ namespace Proyecto_Marathon2024.Repository
                         command.Parameters.Add("@dni_cliente", SqlDbType.VarChar).Value = dni;
                         //
                         command.Parameters.Add("@cod_mem", SqlDbType.Int).Value = clie.Cod_Mem;
+                        command.Parameters.Add("@nombres", SqlDbType.VarChar).Value = clie.Nombres;
+                        command.Parameters.Add("@apellidos", SqlDbType.VarChar).Value = clie.Apellidos;
                         command.Parameters.Add("@correo", SqlDbType.VarChar).Value = clie.Correo;
+                        command.Parameters.Add("@fecha_nac", SqlDbType.Date).Value = clie.Fecha_Nac.ToDateTime(TimeOnly.MinValue);
+                        command.Parameters.Add("@genero", SqlDbType.VarChar).Value = clie.Genero;
                         command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = clie.User_Cli;
                         command.Parameters.Add("@contra_cli", SqlDbType.VarChar).Value = clie.Contra_Cli;
                         command.Parameters.Add("@estado", SqlDbType.Int).Value = clie.Estado;
