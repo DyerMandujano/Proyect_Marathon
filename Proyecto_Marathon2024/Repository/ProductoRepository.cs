@@ -162,15 +162,15 @@ namespace Proyecto_Marathon2024.Repository
                         command.Parameters.Add("@nom_prod", SqlDbType.VarChar).Value = prod.Nom_Prod;
                         command.Parameters.Add("@descipcion", SqlDbType.VarChar).Value = prod.Descripcion;
                         command.Parameters.Add("@precio", SqlDbType.Decimal).Value = prod.Precio;
-                        command.Parameters.Add("@image_front", SqlDbType.VarChar).Value = prod.Image_front;
-                        command.Parameters.Add("@image_back", SqlDbType.VarChar).Value = prod.Image_back;
+                        //command.Parameters.Add("@image_front", SqlDbType.VarChar).Value = prod.Image_front;
+                        //command.Parameters.Add("@image_back", SqlDbType.VarChar).Value = prod.Image_back;
                         command.Parameters.Add("@estado", SqlDbType.Int).Value = prod.Estado;
 
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();
 
                         // Operación exitosa
-                        return "Porducto insertado correctamente.";
+                        return "Producto insertado correctamente.";
                     }
                 }
             }
