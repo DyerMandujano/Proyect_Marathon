@@ -164,7 +164,7 @@ namespace Proyecto_Marathon2024.Repository
                         command.Parameters.Add("@genero", SqlDbType.VarChar).Value = perso.Genero;
                         command.Parameters.Add("@user_per", SqlDbType.VarChar).Value = perso.User_Per;
                         command.Parameters.Add("@contra_per", SqlDbType.VarChar).Value = perso.Contra_Per;
-                        command.Parameters.Add("@estado", SqlDbType.Int).Value = perso.Estado;
+                        //command.Parameters.Add("@estado", SqlDbType.Int).Value = perso.Estado;
 
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();

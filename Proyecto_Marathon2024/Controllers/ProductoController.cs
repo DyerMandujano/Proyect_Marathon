@@ -35,6 +35,13 @@ namespace Proyecto_Marathon2024.Controllers
             }
         }
 
+        [HttpGet("GetListaProductoPerso")]
+        public async Task<IActionResult> GetLista_ProductoPerso()
+        {
+            var respuesta = await _Producto.GetListaProductoPerso();
+            return Ok(respuesta);
+        }
+
         [HttpPost("InsertProducto")]
         public async Task<IActionResult> InsertarProducto([FromBody] Producto prod)
         {
@@ -55,6 +62,8 @@ namespace Proyecto_Marathon2024.Controllers
             var resultado = await _Producto.DeleteProducto_porID(id);
             return Ok(resultado);
         }
+
+        
     }
 }
 

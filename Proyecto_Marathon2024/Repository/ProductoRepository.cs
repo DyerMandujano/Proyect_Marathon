@@ -117,8 +117,8 @@ namespace Proyecto_Marathon2024.Repository
                                     Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
                                     Precio = reader.GetDecimal(reader.GetOrdinal("Precio")),
                                     Image_front = reader.GetString(reader.GetOrdinal("Image_front")),
-                                    Image_back = reader.GetString(reader.GetOrdinal("Image_back")),
-                                    Estado = reader.GetInt32(reader.GetOrdinal("Estado"))
+                                    Estado = reader.GetInt32(reader.GetOrdinal("Estado")),
+                                    Stock = reader.GetInt32(reader.GetOrdinal("Stock"))
                                 };
 
                                 return producto;
@@ -160,11 +160,12 @@ namespace Proyecto_Marathon2024.Repository
                         command.Parameters.Add("@cod_cate", SqlDbType.Int).Value = prod.Cod_Cate;
                         command.Parameters.Add("@cod_talla", SqlDbType.Int).Value = prod.Cod_Talla;
                         command.Parameters.Add("@nom_prod", SqlDbType.VarChar).Value = prod.Nom_Prod;
-                        command.Parameters.Add("@descipcion", SqlDbType.VarChar).Value = prod.Descripcion;
+                        command.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = prod.Descripcion;
                         command.Parameters.Add("@precio", SqlDbType.Decimal).Value = prod.Precio;
-                        //command.Parameters.Add("@image_front", SqlDbType.VarChar).Value = prod.Image_front;
+                        command.Parameters.Add("@image_front", SqlDbType.VarChar).Value = prod.Image_front;
                         //command.Parameters.Add("@image_back", SqlDbType.VarChar).Value = prod.Image_back;
-                        command.Parameters.Add("@estado", SqlDbType.Int).Value = prod.Estado;
+                        //command.Parameters.Add("@estado", SqlDbType.Int).Value = prod.Estado;
+                        command.Parameters.Add("@stock", SqlDbType.Int).Value = prod.Stock;
 
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();
@@ -207,11 +208,12 @@ namespace Proyecto_Marathon2024.Repository
                         command.Parameters.Add("@cod_cate", SqlDbType.Int).Value = prod.Cod_Cate;
                         command.Parameters.Add("@cod_talla", SqlDbType.Int).Value = prod.Cod_Talla;
                         command.Parameters.Add("@nom_prod", SqlDbType.VarChar).Value = prod.Nom_Prod;
-                        command.Parameters.Add("@descipcion", SqlDbType.VarChar).Value = prod.Descripcion;
+                        command.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = prod.Descripcion;
                         command.Parameters.Add("@precio", SqlDbType.Decimal).Value = prod.Precio;
                         command.Parameters.Add("@image_front", SqlDbType.VarChar).Value = prod.Image_front;
-                        command.Parameters.Add("@image_back", SqlDbType.VarChar).Value = prod.Image_back;
+                        //command.Parameters.Add("@image_back", SqlDbType.VarChar).Value = prod.Image_back;
                         command.Parameters.Add("@estado", SqlDbType.Int).Value = prod.Estado;
+                        command.Parameters.Add("@stock", SqlDbType.Int).Value = prod.Stock;
 
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();
@@ -254,6 +256,57 @@ namespace Proyecto_Marathon2024.Repository
                 throw new Exception("Error al eliminar el producto.", ex);
             }
 
+        }
+
+        public async Task<List<Producto_Perso>> GetListaProductoPerso()
+        {
+            try
+            {
+                // Crear la conexión utilizando el método para obtener la cadena de conexión
+                using (SqlConnection connection = new SqlConnection(dataAccses.GetConnectionString()))
+                {
+                    // Abre la conexión de manera asíncrona
+                    await connection.OpenAsync();
+
+                    // Crear el comando para ejecutar el procedimiento almacenado
+                    using (SqlCommand command = new SqlCommand("SP_ListarProductoPerso", connection))
+                    {
+                        // Especificar que se trata de un procedimiento almacenado
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Ejecutar el comando y obtener el SqlDataReader de manera asíncrona
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            // Definir la lista que contendrá los resultados
+                            List<Producto_Perso> listaProducto_perso = new List<Producto_Perso>();
+
+                            // Leer los resultados mientras haya filas
+                            while (await reader.ReadAsync())
+                            {
+                                Producto_Perso producto_per = new Producto_Perso
+                                {
+                                    Cod_Prod = reader.GetInt32(reader.GetOrdinal("Cod_Prod")),
+                                    Nom_Prod = reader.GetString(reader.GetOrdinal("Nom_Prod")),
+                                    Precio = reader.GetDecimal(reader.GetOrdinal("Precio")),
+                                    Stock = reader.GetInt32(reader.GetOrdinal("Stock")),
+                                    Image_front = reader.GetString(reader.GetOrdinal("Image_front")),
+                                    Estado = reader.GetInt32(reader.GetOrdinal("Estado"))
+                                };
+
+                                // Añadir el perfil a la lista
+                                listaProducto_perso.Add(producto_per);
+                            }
+
+                            return listaProducto_perso;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                throw new Exception("Error al obtener la lista de productos perso.", ex);
+            }
         }
     }
 }

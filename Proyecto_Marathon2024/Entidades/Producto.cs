@@ -9,11 +9,12 @@
         public int Cod_Marca { get; set; }
         public int Cod_Cate { get; set; }
         public int Cod_Talla { get; set; }
-        public String Nom_Prod { get; set; }
-        public String Descripcion { get; set; }
+        public string Nom_Prod { get; set; }
+        public string Descripcion { get; set; }
         public decimal Precio { get; set; }
-        public  String Image_front { get; set; }
-        public String Image_back { get; set;}
+        public string Image_front { get; set; }
+        public string Image_back { get; set;}
         public int Estado { get; set; }
+        public int Stock { get; set; }
     }
 }
