@@ -27,6 +27,8 @@ builder.Services.AddScoped<ModeloRepository>();
 builder.Services.AddScoped<TallaRepository>();
 
 builder.Services.AddScoped<ClienteRepository>();
+builder.Services.AddScoped<MembresiaRepository>();
+
 
 var app = builder.Build();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //Permite el acceso a la API desde cualquier origen
