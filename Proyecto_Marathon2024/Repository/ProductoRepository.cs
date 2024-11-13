@@ -308,6 +308,58 @@ namespace Proyecto_Marathon2024.Repository
                 throw new Exception("Error al obtener la lista de productos perso.", ex);
             }
         }
+        public async Task<List<Producto_Inic>> GetListaProductoInic()
+        {
+            try
+            {
+                // Crear la conexión utilizando el método para obtener la cadena de conexión
+                using (SqlConnection connection = new SqlConnection(dataAccses.GetConnectionString()))
+                {
+                    // Abre la conexión de manera asíncrona
+                    await connection.OpenAsync();
+
+                    // Crear el comando para ejecutar el procedimiento almacenado
+                    using (SqlCommand command = new SqlCommand("SP_ListaInicioProd", connection))
+                    {
+                        // Especificar que se trata de un procedimiento almacenado
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Ejecutar el comando y obtener el SqlDataReader de manera asíncrona
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            // Definir la lista que contendrá los resultados
+                            List<Producto_Inic> listaProducto_perso = new List<Producto_Inic>();
+
+                            // Leer los resultados mientras haya filas
+                            while (await reader.ReadAsync())
+                            {
+                                Producto_Inic producto_inic = new Producto_Inic
+                                {
+                                    Cod_Prod = reader.GetInt32(reader.GetOrdinal("Cod_Prod")),
+                                    Nom_Prod = reader.GetString(reader.GetOrdinal("Nom_Prod")),
+                                    Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
+                                    Nom_Marca = reader.GetString(reader.GetOrdinal("Nom_Marca")),
+                                    Nom_Modelo = reader.GetString(reader.GetOrdinal("Nom_Modelo")),
+                                    Precio = reader.GetDecimal(reader.GetOrdinal("Precio")),
+                                    Image_front = reader.GetString(reader.GetOrdinal("Image_front")),
+                                    Estado = reader.GetInt32(reader.GetOrdinal("Estado"))
+                                };
+
+                                // Añadir el perfil a la lista
+                                listaProducto_perso.Add(producto_inic);
+                            }
+
+                            return listaProducto_perso;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                throw new Exception("Error al obtener la lista de productos perso.", ex);
+            }
+        }
     }
 }
 

@@ -156,10 +156,8 @@ namespace Proyecto_Marathon2024.Repository
                         command.Parameters.Add("@correo", SqlDbType.VarChar).Value = perso.Correo;
                         command.Parameters.Add("@fecha_nac", SqlDbType.Date).Value = perso.Fecha_Nac.ToDateTime(TimeOnly.MinValue);
                         command.Parameters.Add("@genero", SqlDbType.VarChar).Value = perso.Genero;
-                        command.Parameters.Add("@puntos_acum", SqlDbType.Int).Value = perso.Puntos_Acum;
                         command.Parameters.Add("@user_cli", SqlDbType.VarChar).Value = perso.User_Cli;
                         command.Parameters.Add("@contra_cli", SqlDbType.VarChar).Value = perso.Contra_Cli;
-                        command.Parameters.Add("@estado", SqlDbType.Int).Value = perso.Estado;
 
                         // Ejecutar el comando de manera asíncrona
                         await command.ExecuteNonQueryAsync();

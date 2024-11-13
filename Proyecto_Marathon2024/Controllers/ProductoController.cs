@@ -41,6 +41,12 @@ namespace Proyecto_Marathon2024.Controllers
             var respuesta = await _Producto.GetListaProductoPerso();
             return Ok(respuesta);
         }
+        [HttpGet("GetListaProductoInic")]
+        public async Task<IActionResult> GetLista_ProductoInic()
+        {
+            var respuesta = await _Producto.GetListaProductoInic();
+            return Ok(respuesta);
+        }
 
         [HttpPost("InsertProducto")]
         public async Task<IActionResult> InsertarProducto([FromBody] Producto prod)
