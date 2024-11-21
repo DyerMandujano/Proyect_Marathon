@@ -14,7 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<DataAccses>();  //Acceso a la base de datos
 // Registra los Repostiorios
 builder.Services.AddScoped<Perfil_PersonalRepository>();  
-builder.Services.AddScoped<PersonalRepository>();  
+builder.Services.AddScoped<PersonalRepository>();
+builder.Services.AddScoped<PedidoRepository>();
+builder.Services.AddScoped<VentaRepository>();
+builder.Services.AddScoped<DetallePedidoRepository>();
+builder.Services.AddScoped<DetalleVentaRepository>();
 
 
 var app = builder.Build();
