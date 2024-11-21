@@ -28,6 +28,11 @@ builder.Services.AddScoped<TallaRepository>();
 
 builder.Services.AddScoped<ClienteRepository>();
 builder.Services.AddScoped<MembresiaRepository>();
+//PEDIDO Y VENTASS
+builder.Services.AddScoped<PedidoRepository>();
+builder.Services.AddScoped<VentaRepository>();
+builder.Services.AddScoped<DetallePedidoRepository>();
+builder.Services.AddScoped<DetalleVentaRepository>();
 
 
 var app = builder.Build();
