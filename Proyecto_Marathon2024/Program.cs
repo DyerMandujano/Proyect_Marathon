@@ -33,6 +33,9 @@ builder.Services.AddScoped<PedidoRepository>();
 builder.Services.AddScoped<VentaRepository>();
 builder.Services.AddScoped<DetallePedidoRepository>();
 builder.Services.AddScoped<DetalleVentaRepository>();
+builder.Services.AddScoped<Pedido_VentaRepository>();
+builder.Services.AddScoped<Tipo_ComproRespository>();
+builder.Services.AddScoped<Tipo_PagoRespository>();
 
 
 var app = builder.Build();
