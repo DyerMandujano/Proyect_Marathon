@@ -22,6 +22,13 @@ namespace Proyecto_Marathon2024.Controllers
             return Ok(respuesta);
         }
 
+        [HttpGet("GetUltimoCodVenta")]
+        public async Task<IActionResult> GetUltCod_Venta()
+        {
+            var respuesta = await _pedido_Venta.GetUltCodVenta();
+            return Ok(respuesta);
+        }
+
         [HttpPost("InsertPedido_Venta")]
         public async Task<IActionResult> InsertarPedido_Venta([FromBody] Pedido_Venta ped_venta)
         {

@@ -110,36 +110,75 @@ namespace Proyecto_Marathon2024.Repository
         {
             try
             {
-                // Crea la conexión utilizando el método para obtener la cadena de conexión
+                using (SqlConnection connection = new SqlConnection(dataAccses.GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+
+                    using (SqlCommand command = new SqlCommand("SP_InsertDetallesPd_Venta", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Añadir parámetros del procedimiento almacenado
+                        command.Parameters.Add("@cod_prod", SqlDbType.Int).Value = det_ped_venta.Cod_prod;
+                        command.Parameters.Add("@cantidad", SqlDbType.Int).Value = det_ped_venta.Cantidad;
+                        command.Parameters.Add("@precio_venta", SqlDbType.Decimal).Value = det_ped_venta.Precio_Venta;
+
+                        // Parámetro de salida para capturar el resultado
+                        var outputParam = new SqlParameter("@result", SqlDbType.VarChar, 50)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputParam);
+
+                        // Ejecutar el procedimiento almacenado
+                        await command.ExecuteNonQueryAsync();
+
+                        // Retornar el mensaje del procedimiento almacenado
+                        return outputParam.Value.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar el detalle de venta.", ex);
+            }
+        }
+
+        public async Task<int> GetUltCodVenta()
+        {
+            try
+            {
+                // Crear la conexión utilizando el método para obtener la cadena de conexión
                 using (SqlConnection connection = new SqlConnection(dataAccses.GetConnectionString()))
                 {
                     // Abre la conexión de manera asíncrona
                     await connection.OpenAsync();
 
-                    // Crea el comando para ejecutar el procedimiento almacenado
-                    using (SqlCommand command = new SqlCommand("SP_InsertDetallesPd_Venta", connection))
+                    // Crear el comando para ejecutar el procedimiento almacenado
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerUltCod_Venta", connection))
                     {
-                        // Especifica que se trata de un procedimiento almacenado
+                        // Especificar que se trata de un procedimiento almacenado
                         command.CommandType = CommandType.StoredProcedure;
 
-                        // Añadir los parámetros requeridos por el procedimiento almacenado
-                        command.Parameters.Add("@cod_ped_num_docu", SqlDbType.Int).Value = det_ped_venta.Cod_ped_num_docu;
-                        command.Parameters.Add("@cod_prod", SqlDbType.Int).Value = det_ped_venta.Cod_prod;
-                        command.Parameters.Add("@cantidad", SqlDbType.VarChar).Value = det_ped_venta.Cantidad;
-                        command.Parameters.Add("@precio_venta", SqlDbType.VarChar).Value = det_ped_venta.Precio_Venta;
+                        // Ejecutar el comando y obtener el resultado de manera escalar
+                        object result = await command.ExecuteScalarAsync();
 
-                        // Ejecutar el comando de manera asíncrona
-                        await command.ExecuteNonQueryAsync();
-
-                        //operación exitosa
-                        return "Detalle Venta insertada correctamente.";
+                        // Validar y convertir el resultado a un entero
+                        if (result != null && int.TryParse(result.ToString(), out int numDocumento))
+                        {
+                            return numDocumento; // Retorna el valor obtenido
+                        }
+                        else
+                        {
+                            throw new Exception("No se pudo obtener el último Num_Documento.");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 // Manejo de errores
-                throw new Exception("Error al insertar el detalle de venta.", ex);
+                throw new Exception("Error al obtener el último Num_Documento.", ex);
             }
         }
     }
